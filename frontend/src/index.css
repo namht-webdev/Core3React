@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { 
+  margin: 0; 
+  background-color: 
+  #f7f8fa; 
+}
+
+@layer components{
+  .header{
+    @apply fixed box-border top-0 w-full flex items-center justify-between py-[10px] px-[20px] 
+      bg-[#fff] border-solid border-b-[1px] border-b-[#e3e2e2] shadow-[0_3px_7px_0_rgba(110,112,114,0.21)];
+  }
+  .search-box{
+    @apply box-border text-[16px] py-2 px-[10px] border-solid 
+        border-b-[1px] border-b-[#e3e2e2] rounded-[3px] text-[#857c81] bg-white w-48 h-7 focus:outline-[#e3e2e2];
+  }
+  .primary-btn{
+    @apply bg-[#824c67] border-[#824c67] border-solid rounded-[5px] text-[16px] px-[10px] py-[5px] text-white
+    cursor-pointer hover:bg-[#681c41] focus:bg-[#824c67];
+  }
+  .question-list{
+    @apply list-none mt-[10px] py-0 px-5 bg-[#fff] rounded-bl-[4px] rounded-br-[4px] border-t-[3px] border-solid border-[#efd197] shadow-[0_3px_5px_0_rgba(0,0,0,0.16)];;
+  }
+}
+  
