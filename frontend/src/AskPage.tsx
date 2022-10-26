@@ -7,3 +7,5 @@ export const AskPage = () => (
     <PageTitle title="Ask a question" />
   </Page>
 );
+
+export default AskPage;
