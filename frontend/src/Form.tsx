@@ -22,19 +22,27 @@ export const Form: React.FC<Props> = ({
   children,
   type = 'submit',
 }) => {
-  const [values, setValues] = useState<Values>();
+  const [values, setValues] = useState<Values>({});
   return (
-    <form noValidate={true}>
-      <fieldset className="form">
-        {children}
-        <div className="mt-7 pt-5 border-solid border-t-[1px] border-[#e3e2e2]">
-          <PrimaryButton
-            type={type}
-            title={submitCaption}
-            onClick={() => console.log(123)}
-          />
-        </div>
-      </fieldset>
-    </form>
+    <FormContext.Provider
+      value={{
+        values,
+        setValue: (fieldName: string, value: any) =>
+          setValues({ ...values, [fieldName]: value }),
+      }}
+    >
+      <form noValidate={true}>
+        <fieldset className="form">
+          {children}
+          <div className="mt-7 pt-5 border-solid border-t-[1px] border-[#e3e2e2]">
+            <PrimaryButton
+              type={type}
+              title={submitCaption}
+              onClick={() => console.log(123)}
+            />
+          </div>
+        </fieldset>
+      </form>
+    </FormContext.Provider>
   );
 };
