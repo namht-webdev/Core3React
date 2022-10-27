@@ -20,9 +20,7 @@ const App: React.FC = () => {
           <Route
             path="/ask"
             element={
-              <Suspense
-                fallback={<p className="mt-[100px] text-center">Loading ...</p>}
-              >
+              <Suspense fallback={<p>Loading ...</p>}>
                 <AskPage />
               </Suspense>
             }
