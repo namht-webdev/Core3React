@@ -1,9 +1,13 @@
-import { Link } from 'react-router-dom';
-import { ChangeEvent } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
 import { UserIcon } from './Icon';
 export const Header = () => {
+  const [search, setSearch] = useSearchParams();
+  const criteria = search.get('criteria') || '';
+
   const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
+    setSearch({ criteria: e.target.value });
+    console.log(search);
   };
   return (
     <div className="header">
