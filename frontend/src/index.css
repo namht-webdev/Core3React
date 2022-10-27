@@ -2,19 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body { 
-  margin: 0; 
-  background-color: 
-  #f7f8fa; 
+body {
+  margin: 0;
+  background-color:
+  #f7f8fa;
 }
 
 @layer components{
   .header{
-    @apply fixed box-border top-0 w-full flex items-center justify-between py-[10px] px-[20px] 
+    @apply fixed box-border top-0 w-full flex items-center justify-between py-[10px] px-[20px]
       bg-[#fff] border-solid border-b-[1px] border-b-[#e3e2e2] shadow-[0_3px_7px_0_rgba(110,112,114,0.21)];
   }
   .search-box{
-    @apply box-border text-[16px] py-2 px-[10px] border-solid 
+    @apply box-border text-[16px] py-2 px-[10px] border-solid
         border-b-[1px] border-b-[#e3e2e2] rounded-[3px] text-[#857c81] bg-white w-48 h-7 focus:outline-[#e3e2e2];
   }
   .primary-btn{
@@ -24,5 +24,10 @@ body {
   .question-list{
     @apply list-none mt-[10px] py-0 px-5 bg-[#fff] rounded-bl-[4px] rounded-br-[4px] border-t-[3px] border-solid border-[#efd197] shadow-[0_3px_5px_0_rgba(0,0,0,0.16)];;
   }
+  .form{
+    @apply mt-[10px] mx-auto p-7 w-[350px] bg-[#f7f8fa] rounded-[4px] border-solid border-t-[1px] border-[#e3e2e2] shadow-[0_3px_5px_0_rgba(0,0,0,0.16)]
+  }
+  .field{
+    @apply box-border text-[16px] mb-[5px] py-2 px-[10px] border-solid border-[1px] border-[#e3e2e2] rounded-[3px] text-[#5c5a5a] bg-white w-full focus:outline-[#e3e2e2] disabled:bg-[#f7f8fa]
+  }
 }
-  

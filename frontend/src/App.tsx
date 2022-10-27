@@ -19,7 +19,11 @@ const App: React.FC = () => {
           <Route path="/search" element={<SearchPage />} />
           <Route
             path="/ask"
-            element={<Suspense fallback={<AskPage />}></Suspense>}
+            element={
+              <Suspense fallback={<p>Loading ...</p>}>
+                <AskPage />
+              </Suspense>
+            }
           />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/questions/:questionId" element={<QuestionPage />} />
