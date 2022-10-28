@@ -4,6 +4,8 @@ import { Page } from './Page';
 import { useParams } from 'react-router-dom';
 import { getQuestion, QuestionData } from './QuestionsData';
 import { AnswerList } from './AnswerList';
+import { Form } from './Form';
+import { Field } from './Field';
 
 export const QuestionPage = () => {
   const [question, setQuestion] = useState<QuestionData | null>(null);
@@ -31,6 +33,11 @@ export const QuestionPage = () => {
               question.userName
             } on ${question.created.toLocaleDateString()} ${question.created.toLocaleTimeString()}`}</div>
             <AnswerList data={question.answers} />
+            <div className="mt-5">
+              <Form submitCaption="Submit Your Answer">
+                <Field name="content" type="TextArea" label="Your answer" />
+              </Form>
+            </div>
           </Fragment>
         )}
       </div>
