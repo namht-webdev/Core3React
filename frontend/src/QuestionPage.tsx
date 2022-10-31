@@ -2,11 +2,10 @@ import { useState, Fragment, useEffect } from 'react';
 import { PageTitle } from './PageTitle';
 import { Page } from './Page';
 import { useParams } from 'react-router-dom';
-import { getQuestion, QuestionData } from './QuestionsData';
+import { getQuestion, QuestionData, postAnswer } from './QuestionsData';
 import { AnswerList } from './AnswerList';
-import { Form } from './Form';
 import { Field } from './Field';
-import { required, minLength } from './Form';
+import { Form, required, minLength, Values } from './Form';
 
 export const QuestionPage = () => {
   const [question, setQuestion] = useState<QuestionData | null>(null);
@@ -20,6 +19,17 @@ export const QuestionPage = () => {
       doGetQuestion(Number(questionId));
     }
   }, [questionId]);
+
+  const handleSubmit = async (values: Values) => {
+    const result = await postAnswer({
+      questionId: question!.questionId,
+      content: values.content,
+      userName: 'Fred',
+      created: new Date(),
+    });
+    return { success: result ? true : false };
+  };
+
   return (
     <Page>
       <PageTitle title="Question" />
@@ -45,6 +55,9 @@ export const QuestionPage = () => {
                     { validator: minLength, args: 50 },
                   ],
                 }}
+                onSubmit={handleSubmit}
+                failureMessage="There was a problem with your answer"
+                successMessage="Your answer was successfully submitted"
               >
                 <Field name="content" type="TextArea" label="Your answer" />
               </Form>

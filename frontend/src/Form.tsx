@@ -1,6 +1,6 @@
 import React, { useState, createContext, FormEvent } from 'react';
 import { PrimaryButton } from './PrimaryButton';
-interface Values {
+export interface Values {
   [key: string]: any;
 }
 interface Errors {
