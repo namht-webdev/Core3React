@@ -7,8 +7,8 @@
       "error",
       {
         "singleQuote": true,
-        "parser": "flow",
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "parser": "typescript"
       }
     ]
   }

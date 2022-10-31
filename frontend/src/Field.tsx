@@ -7,17 +7,24 @@ interface Props {
 }
 
 export const Field: FC<Props> = ({ name, label, type = 'Text' }) => {
-  const { setValue } = useContext(FormContext);
+  const { setValue, touched, validate, setTouched } = useContext(FormContext);
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => {
     if (setValue) {
       setValue(name, e.currentTarget.value);
     }
+    if (touched[name] && validate) {
+      validate(name);
+    }
+  };
+  const handleBlur = () => {
+    if (setTouched) setTouched(name);
+    if (validate) validate(name);
   };
   return (
     <FormContext.Consumer>
-      {({ values }) => (
+      {({ values, errors }) => (
         <div className="flex flex-col mb-[15px]">
           {label && (
             <label className="font-bold" htmlFor={name}>
@@ -29,17 +36,27 @@ export const Field: FC<Props> = ({ name, label, type = 'Text' }) => {
               type={type.toLowerCase()}
               id={name}
               className="field"
-              value={values[name] ? '' : values[name]}
+              value={values[name] === undefined ? '' : values[name]}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
           )}
           {type === 'TextArea' && (
             <textarea
               id={name}
-              className="field h-[100px] value={context.values[name] ? '' : context.values[name]}"
+              className="field h-[100px]"
+              value={values[name] === undefined ? '' : values[name]}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
           )}
+          {errors[name] &&
+            errors[name].length > 0 &&
+            errors[name].map((error) => (
+              <div className="text-[12px] text-red-500" key={error}>
+                {error}
+              </div>
+            ))}
         </div>
       )}
     </FormContext.Consumer>

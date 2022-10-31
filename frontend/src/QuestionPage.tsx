@@ -6,6 +6,7 @@ import { getQuestion, QuestionData } from './QuestionsData';
 import { AnswerList } from './AnswerList';
 import { Form } from './Form';
 import { Field } from './Field';
+import { required, minLength } from './Form';
 
 export const QuestionPage = () => {
   const [question, setQuestion] = useState<QuestionData | null>(null);
@@ -34,7 +35,17 @@ export const QuestionPage = () => {
             } on ${question.created.toLocaleDateString()} ${question.created.toLocaleTimeString()}`}</div>
             <AnswerList data={question.answers} />
             <div className="mt-5">
-              <Form submitCaption="Submit Your Answer">
+              <Form
+                submitCaption="Submit Your Answer"
+                validationRules={{
+                  content: [
+                    {
+                      validator: required,
+                    },
+                    { validator: minLength, args: 50 },
+                  ],
+                }}
+              >
                 <Field name="content" type="TextArea" label="Your answer" />
               </Form>
             </div>
