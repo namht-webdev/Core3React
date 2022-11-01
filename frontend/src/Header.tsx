@@ -1,17 +1,16 @@
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChangeEvent, useState, FormEvent } from 'react';
 import { UserIcon } from './Icon';
 export const Header = () => {
-  const [search, setSearch] = useSearchParams();
-  const criteria = search.get('criteria') || '';
+  const [search, setSearch] = useState('');
   const navigate = useNavigate();
 
   const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch({ criteria: e.target.value });
+    setSearch(e.target.value);
   };
   const handleSeachSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate(`/search?criteria=${criteria}`);
+    navigate(`/search?criteria=${search}`);
   };
   return (
     <div className="header">
