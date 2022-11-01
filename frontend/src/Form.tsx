@@ -141,11 +141,7 @@ export const Form: React.FC<Props> = ({
         >
           {children}
           <div className="mt-7 pt-5 border-solid border-t-[1px] border-[#e3e2e2]">
-            <PrimaryButton
-              type={type}
-              title={submitCaption}
-              onClick={() => console.log(123)}
-            />
+            <PrimaryButton type={type} title={submitCaption} />
           </div>
           {submitted && submitError && (
             <p className="text-red-500">{failureMessage}</p>
