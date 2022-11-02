@@ -1,5 +1,11 @@
-import { QuestionData } from './QuestionsData';
+import {
+  QuestionData,
+  getUnanseredQuestions,
+  postQuestion,
+  PostQuestionData,
+} from './QuestionsData';
 import { Action, ActionCreator, Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
 // States
 
@@ -37,7 +43,10 @@ type QuestionsActions =
   | PostedQuestionAction;
 
 // Action creators
-export const getUnansweredQuestionsActionCreator = () => {
+
+export const getUnansweredQuestionsActionCreator: ActionCreator<
+  ThunkAction<Promise<void>, QuestionData[], null, GotUnansweredQuestionsAction>
+> = () => {
   return async (dispatch: Dispatch) => {
     // TODO - dispatch the GettingUnansweredQuestions action
     const gettingUnansweredQuestionsAction: GettingUnansweredQuestionsAction = {
@@ -46,6 +55,41 @@ export const getUnansweredQuestionsActionCreator = () => {
     dispatch(gettingUnansweredQuestionsAction);
 
     // TODO - get the questions from server
+    const questions = await getUnanseredQuestions();
     // TODO - dispatch the GotUnansweredQuestions action
+    const gotUnansweredQuestionsAction: GotUnansweredQuestionsAction = {
+      questions,
+      type: 'GotUnansweredQuestions',
+    };
+    dispatch(gotUnansweredQuestionsAction);
   };
+};
+
+export const postQuestionActionCreator: ActionCreator<
+  ThunkAction<
+    Promise<void>,
+    QuestionData,
+    PostQuestionData,
+    PostedQuestionAction
+  >
+> = (question: PostQuestionData) => {
+  return async (dispatch: Dispatch) => {
+    const result = await postQuestion(question);
+    const postedQuestionAction: PostedQuestionAction = {
+      type: 'PostedQuestion',
+      result,
+    };
+    dispatch(postedQuestionAction);
+  };
+};
+
+// action clear posted question in store not in server so it is synchronous
+export const clearPostedQuestionActionCreator: ActionCreator<
+  PostedQuestionAction
+> = () => {
+  const postedQuestionAction: PostedQuestionAction = {
+    type: 'PostedQuestion',
+    result: undefined,
+  };
+  return postedQuestionAction;
 };
