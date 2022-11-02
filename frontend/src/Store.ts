@@ -4,8 +4,17 @@ import {
   postQuestion,
   PostQuestionData,
 } from './QuestionsData';
-import { Action, ActionCreator, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import {
+  Action,
+  ActionCreator,
+  Dispatch,
+  Reducer,
+  combineReducers,
+  Store,
+  createStore,
+  applyMiddleware,
+} from 'redux';
+import thunk, { ThunkAction } from 'redux-thunk';
 
 // States
 
@@ -93,3 +102,56 @@ export const clearPostedQuestionActionCreator: ActionCreator<
   };
   return postedQuestionAction;
 };
+
+// Reducers
+
+const questionsReducer: Reducer<QuestionsState, QuestionsActions> = (
+  state = initialQuestionState,
+  action,
+) => {
+  // TODO - Handle the different actions and return new state
+  switch (action.type) {
+    case 'GettingUnansweredQuestions': {
+      // TODO - return new state
+      return {
+        ...state,
+        unanswered: null,
+        loading: true,
+      };
+    }
+    case 'GotUnansweredQuestions': {
+      // TODO - return new state
+      return {
+        ...state,
+        unanswered: action.questions,
+        loading: false,
+      };
+    }
+    case 'PostedQuestion': {
+      // TODO - return new state
+      return {
+        ...state,
+        unanswered: action.result
+          ? (state.unanswered || []).concat(action.result)
+          : state.unanswered,
+        postedResult: action.result,
+      };
+    }
+    default:
+      neverReached(action);
+  }
+
+  return state;
+};
+
+const neverReached = (never: never) => {};
+
+const rootReducer = combineReducers<AppState>({
+  questions: questionsReducer,
+});
+
+// export const toolKitconfigureStore => khuyển cáo dùng toolkit
+export function configureStore(): Store<AppState> {
+  const store = createStore(rootReducer, undefined, applyMiddleware(thunk));
+  return store;
+}
