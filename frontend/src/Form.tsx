@@ -57,7 +57,8 @@ interface Props {
   children?: React.ReactNode;
   type?: 'submit';
   validationRules?: ValidationProp;
-  onSubmit: (value: Values) => Promise<SubmitResult>;
+  onSubmit: (value: Values) => Promise<SubmitResult> | void;
+  submitResult?: SubmitResult;
   successMessage?: string;
   failureMessage?: string;
 }
@@ -68,6 +69,7 @@ export const Form: React.FC<Props> = ({
   type = 'submit',
   validationRules,
   onSubmit,
+  submitResult,
   successMessage = 'Successed',
   failureMessage = 'Something went wrong',
 }) => {
@@ -99,10 +101,17 @@ export const Form: React.FC<Props> = ({
     if (validateForm()) {
       setSubmitting(true);
       setSubmitError(false);
-      setSubmitted(true);
+
       const result = await onSubmit(values);
+      // The result may be passed through as a prop
+      if (result === undefined) {
+        return;
+      }
+
       setErrors(result.error || {});
       setSubmitError(!result.success);
+      setSubmitting(false);
+      setSubmitted(true);
     }
   };
 
@@ -120,6 +129,15 @@ export const Form: React.FC<Props> = ({
     return haveErrors;
   };
 
+  const disabled = submitResult
+    ? submitResult.success
+    : submitting || (submitted && !submitError);
+  const showError = submitResult
+    ? !submitResult.success
+    : submitted && submitError;
+  const showSuccess = submitResult
+    ? submitResult.success
+    : submitted && !submitError;
   return (
     <FormContext.Provider
       value={{
@@ -135,20 +153,13 @@ export const Form: React.FC<Props> = ({
       }}
     >
       <form noValidate={true} onSubmit={handleSubmit}>
-        <fieldset
-          className="form"
-          disabled={submitting || (submitted && !submitError)}
-        >
+        <fieldset className="form" disabled={disabled}>
           {children}
           <div className="mt-7 pt-5 border-solid border-t-[1px] border-[#e3e2e2]">
             <PrimaryButton type={type} title={submitCaption} />
           </div>
-          {submitted && submitError && (
-            <p className="text-red-500">{failureMessage}</p>
-          )}
-          {submitted && !submitError && (
-            <p className="text-green-500">{successMessage}</p>
-          )}
+          {showError && <p className="text-red-500">{failureMessage}</p>}
+          {showSuccess && <p className="text-green-500">{successMessage}</p>}
         </fieldset>
       </form>
     </FormContext.Provider>

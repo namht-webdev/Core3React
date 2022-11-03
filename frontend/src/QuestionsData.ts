@@ -90,7 +90,8 @@ export const postQuestion = async (
   question: PostQuestionData,
 ): Promise<QuestionData | undefined> => {
   await wait(500);
-  const questionId: number = Math.max(...questions.map((q) => questionId)) + 1;
+  const questionId: number =
+    Math.max(...questions.map((q) => q.questionId)) + 1;
   const newQuestion: QuestionData = {
     ...question,
     questionId,
