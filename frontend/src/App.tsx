@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
-import { configureStore } from './Store';
 import { Header } from './Header';
 import HomePage from './HomePage';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -8,8 +7,9 @@ import { SearchPage } from './SearchPage';
 import { SignInPage } from './SignInPage';
 import { NotFoundPage } from './NotFoundPage';
 import { QuestionPage } from './QuestionPage';
+import storeRedux from './Store';
 const AskPage = lazy(() => import('./AskPage'));
-const store = configureStore();
+const store = storeRedux;
 
 const App: React.FC = () => {
   return (

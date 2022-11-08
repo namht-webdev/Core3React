@@ -51,6 +51,8 @@ const HomePage: FC<Props> = ({
   );
 };
 
+// map state to Homepage Props
+// return {A : B} => A is name of props we want to pass as props of HomePage component, B is actually value of A
 const mapStateToProps = (store: AppState) => {
   return {
     questions: store.questions.unanswered,
@@ -60,8 +62,9 @@ const mapStateToProps = (store: AppState) => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
-    getUnansweredQuestions: () =>
-      dispatch(getUnansweredQuestionsActionCreator()),
+    getUnansweredQuestions: () => {
+      return dispatch(getUnansweredQuestionsActionCreator());
+    },
   };
 };
 

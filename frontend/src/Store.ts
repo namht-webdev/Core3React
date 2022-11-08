@@ -10,11 +10,10 @@ import {
   Dispatch,
   Reducer,
   combineReducers,
-  Store,
-  createStore,
-  applyMiddleware,
 } from 'redux';
-import thunk, { ThunkAction } from 'redux-thunk';
+
+import { ThunkAction } from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 
 // States
 
@@ -151,7 +150,8 @@ const rootReducer = combineReducers<AppState>({
 });
 
 // export const toolKitconfigureStore => khuyển cáo dùng toolkit
-export function configureStore(): Store<AppState> {
-  const store = createStore(rootReducer, undefined, applyMiddleware(thunk));
-  return store;
-}
+
+const storeRedux = configureStore<AppState>({
+  reducer: rootReducer,
+});
+export default storeRedux;
