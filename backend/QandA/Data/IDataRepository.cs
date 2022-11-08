@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
+using Dapper;
+using QandA.Data.Models;
 
 namespace QandA.Data
 {
@@ -16,5 +19,12 @@ namespace QandA.Data
         GetQuestion(int questionId);
         bool QuestionExists(int questionId);
         AnswerGetResponse GetAnswer(int answerId);
+        QuestionGetSingleResponse
+        PostQuestion(QuestionPostRequest question);
+        QuestionGetSingleResponse
+        PutQuestion(int questionId, QuestionPutRequest question);
+        void DeleteQuestion(int questionId);
+        AnswerGetResponse PostAnswer(AnswerPostRequest answer);
     }
 }
+
