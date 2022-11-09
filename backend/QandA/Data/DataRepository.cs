@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Dapper;
 
 namespace QandA.Data
 {
@@ -74,7 +75,7 @@ namespace QandA.Data
 
         public IEnumerable<QuestionGetManyResponse> GetQuestions()
         {
-
+            QuestionGetManyResponse ques
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
