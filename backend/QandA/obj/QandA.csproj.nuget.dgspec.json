@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\React.Net\\Source\\QandA\\Core3React\\backend\\QandA\\QandA.csproj": {}
+    "D:\\SeriousLearning\\Src\\Core3React\\backend\\QandA\\QandA.csproj": {}
   },
   "projects": {
-    "E:\\React.Net\\Source\\QandA\\Core3React\\backend\\QandA\\QandA.csproj": {
+    "D:\\SeriousLearning\\Src\\Core3React\\backend\\QandA\\QandA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\React.Net\\Source\\QandA\\Core3React\\backend\\QandA\\QandA.csproj",
+        "projectUniqueName": "D:\\SeriousLearning\\Src\\Core3React\\backend\\QandA\\QandA.csproj",
         "projectName": "QandA",
-        "projectPath": "E:\\React.Net\\Source\\QandA\\Core3React\\backend\\QandA\\QandA.csproj",
-        "packagesPath": "C:\\Users\\namit\\.nuget\\packages\\",
-        "outputPath": "E:\\React.Net\\Source\\QandA\\Core3React\\backend\\QandA\\obj\\",
+        "projectPath": "D:\\SeriousLearning\\Src\\Core3React\\backend\\QandA\\QandA.csproj",
+        "packagesPath": "C:\\Users\\HOÀNGTRUNGNAM\\.nuget\\packages\\",
+        "outputPath": "D:\\SeriousLearning\\Src\\Core3React\\backend\\QandA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\namit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HOÀNGTRUNGNAM\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -71,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
         }
       }
     }

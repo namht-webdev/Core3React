@@ -41,12 +41,16 @@ namespace QandA.Data
                 @"EXEC dbo.Question_GetSingle @QuestionId = @QuestionId",
                 new { QuestionId = questionId }
                 );
-                question.Answers =
-                connection.Query<AnswerGetResponse>(
-                @"EXEC dbo.Answer_Get_ByQuestionId
-                            @QuestionId = @QuestionId",
-                new { QuestionId = questionId }
-                );
+                // TODO - Get the answers for the question
+                if (question != null)
+                {
+                    question.Answers =
+                    connection.Query<AnswerGetResponse>(
+                    @"EXEC dbo.Answer_Get_ByQuestionId
+                                @QuestionId = @QuestionId",
+                    new { QuestionId = questionId }
+                    );
+                }
                 return question;
             }
 
@@ -54,7 +58,6 @@ namespace QandA.Data
 
         public IEnumerable<QuestionGetManyResponse> GetQuestions()
         {
-            QuestionGetManyResponse ques
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -69,6 +72,7 @@ namespace QandA.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
+                // TODO - execute Question_GetMany_BySearch stored procedure
                 return connection.Query<QuestionGetManyResponse>(
                 @"EXEC dbo.Question_GetMany_BySearch @Search = @Search",
                 new { Search = search }

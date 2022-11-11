@@ -10,19 +10,40 @@ namespace QandA.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionsController: ControllerBase
+    public class QuestionsController : ControllerBase
     {
         private readonly IDataRepository _dataRepository;
         public QuestionsController(IDataRepository dataRepository)
         {
             _dataRepository = dataRepository;
         }
+
         [HttpGet]
-        public IEnumerable<QuestionGetManyResponse> GetQuestions()
+        public IEnumerable<QuestionGetManyResponse> GetQuestions(string search)
         {
-            var questions = _dataRepository.GetQuestions();
-            return questions;
+            return string.IsNullOrEmpty(search) ? _dataRepository.GetQuestions() : _dataRepository.GetQuestionsBySearch(search);
         }
+
+        [HttpGet("unanswered")]
+        public IEnumerable<QuestionGetManyResponse> GetUnansweredQuestions()
+        {
+            return _dataRepository.GetUnansweredQuestions();
+        }
+
+        [HttpGet("{questionId}")]
+        public ActionResult<QuestionGetSingleResponse> GetQuestion(int questionId)
+        {
+            var question = _dataRepository.GetQuestion(questionId);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return question;
+        }
+
+
+
+
     }
-    
+
 }
